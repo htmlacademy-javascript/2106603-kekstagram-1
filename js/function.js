@@ -22,3 +22,24 @@ function getNumber(objChoose) {
   return result;
 }
 getNumber(1.5);
+
+//Функция для формирования адресов файлов
+function generatesFileAddresses(source, minLength, addPart) {
+  let part = '';
+  let result = '';
+  if (source.length >= minLength) {
+    return source;
+  } else {
+    const partLength = minLength - source.length;
+    if(partLength % addPart.length && partLength > addPart.length) {
+      const repeatPart = partLength / addPart.length;
+      part = addPart.repeat(repeatPart);
+      result = part.slice(0, partLength - addPart.length) + part + source;
+      return result;
+    }
+    part = addPart.repeat(partLength);
+    result = part.slice(0, partLength) + source;
+    return result;
+  }
+}
+generatesFileAddresses('1', 4, '0');
