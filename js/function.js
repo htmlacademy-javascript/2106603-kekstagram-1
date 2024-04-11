@@ -43,3 +43,9 @@ function generatesFileAddresses(source, minLength, addPart) {
   }
 }
 generatesFileAddresses('1', 4, '0');
+
+//Функция для проверки длины строки при валидации формы.
+function checkLengthString (string, maxLength) {
+  return string.length <= maxLength;
+}
+checkLengthString ('проверяемая строка', 20);
