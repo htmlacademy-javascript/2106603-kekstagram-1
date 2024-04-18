@@ -34,7 +34,7 @@ d)
 const PHOTO_COUNT = 25;
 const MIN_COUNT_LIKES = 15;
 const MAX_COUNT_LIKES = 200;
-const COMMENTS_COUNT = 10;
+const AVATARS_COUNT = 6;
 const PHOTO_DESCRIPTIONS = [
   'Весна',
   'Лето на море',
@@ -70,9 +70,22 @@ const COMMENTS = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+const NAMES = [
+  'Сергей',
+  'Андрей',
+  'Алексей',
+  'Максим',
+  'Евгений',
+  'Иван',
+  'София',
+  'Анна',
+  'Мария',
+  'Ева',
+  'Виктория',
+  'Алиса'
+];
 
 //Получение случайного целого числа в заданном интервале, включительно
-
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -81,7 +94,6 @@ const getRandomInteger = (a, b) => {
 };
 
 //Поиск случайного элемента в переданном массиве.
-
 const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
 
 const getIdGenerator = () => {
@@ -93,5 +105,24 @@ const getIdGenerator = () => {
   };
 };
 
-//генерируем id для комментария
 const creatCommentId = getIdGenerator();
+
+const creatMessage = () =>
+  Array.from({length: getRandomInteger(1, 2)}, () => getRandomArrayElement(COMMENTS)).join(' ');
+
+//Создание комментария
+const creatComment = () => ({
+  id: creatCommentId(),
+  avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
+  message: creatMessage(),
+  name: getRandomArrayElement(NAMES),
+});
+
+//const getCountComments = getRandomInteger(1, 10);
+
+const getListComments = () => {
+  const getCountComments = getRandomInteger(1, 10);
+  const comments = Array.from({length: getCountComments}, creatComment);
+  return comments;
+};
+
