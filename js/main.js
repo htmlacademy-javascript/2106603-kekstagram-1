@@ -1,36 +1,3 @@
-/*Структура каждого объекта должна быть следующей:
-1)
-id, число — идентификатор опубликованной фотографии. Это число от 1 до 25. Идентификаторы не должны повторяться.
-2)
-url, строка — адрес картинки вида photos/{{i}}.jpg, где {{i}} — это число от 1 до 25. Адреса картинок не должны повторяться.
-3)
-description, строка — описание фотографии. Описание придумайте самостоятельно.
-4)
-likes, число — количество лайков, поставленных фотографии. Случайное число от 15 до 200.
-5)
-comments, массив объектов — список комментариев, оставленных другими пользователями к этой фотографии. Количество комментариев к каждой фотографии вы определяете на своё усмотрение. Все комментарии генерируются случайным образом. Пример описания объекта с комментарием:
-
-{
-  id: 135,
-  avatar: 'img/avatar-6.svg',
-  message: 'В целом всё неплохо. Но не всё.',
-  name: 'Артём',
-}
-
-a) id — любое число. Идентификаторы не должны повторяться.
-
-b)Поле avatar — это строка, значение которой формируется по правилу img/avatar-{{случайное число от 1 до 6}}.svg. Аватарки подготовлены в директории img.
-
-c)Для формирования текста комментария — message — вам необходимо взять одно или два случайных предложения из представленных ниже:
-
-Всё отлично!
-В целом всё неплохо. Но не всё.
-Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.
-Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.
-Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.
-Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!
-d)
-Имена авторов также должны быть случайными. Набор имён для комментаторов составьте сами. Подставляйте случайное имя в поле name.*/
 const PHOTO_COUNT = 25;
 const MIN_COUNT_LIKES = 15;
 const MAX_COUNT_LIKES = 200;
@@ -110,7 +77,7 @@ const creatCommentId = getIdGenerator();
 const creatMessage = () =>
   Array.from({length: getRandomInteger(1, 2)}, () => getRandomArrayElement(COMMENTS)).join(' ');
 
-//Создание комментария
+
 const creatComment = () => ({
   id: creatCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
@@ -118,11 +85,22 @@ const creatComment = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-//const getCountComments = getRandomInteger(1, 10);
-
 const getListComments = () => {
   const getCountComments = getRandomInteger(1, 10);
   const comments = Array.from({length: getCountComments}, creatComment);
   return comments;
 };
 
+const creatPhoto = (photoId) => ({
+  id: photoId,
+  url: `photos/${photoId}.jpg`,
+  description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
+  likes: getRandomInteger(MIN_COUNT_LIKES, MAX_COUNT_LIKES),
+  comments: getListComments(),
+});
+
+const getListPhotos = () =>
+  Array.from({length: PHOTO_COUNT}, (_, photoId) => creatPhoto(photoId + 1));
+  //Array.from({length: PHOTO_COUNT}).map((_, photoId) => creatPhoto(photoId + 1));
+
+getListPhotos();
