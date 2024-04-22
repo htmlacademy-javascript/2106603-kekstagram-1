@@ -93,3 +93,5 @@ const getListPhotos = () =>
   Array.from({length: PHOTO_COUNT}, (_, photoId) => creatPhoto(photoId + 1));
 
 getListPhotos();
+
+export {getListPhotos};

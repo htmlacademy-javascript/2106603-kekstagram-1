@@ -1,1 +1,3 @@
-import './data.js';
+import {getListPhotos} from './data.js';
+
+getListPhotos();
