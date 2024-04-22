@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomArrayElement} from './util.js';
+import {getRandomInteger, getRandomArrayElement, getIdGenerator} from './util.js';
 const PHOTO_COUNT = 25;
 const MIN_COUNT_LIKES = 15;
 const MAX_COUNT_LIKES = 200;
@@ -52,15 +52,6 @@ const NAMES = [
   'Виктория',
   'Алиса'
 ];
-
-const getIdGenerator = () => {
-  let lastCreatedId = 0;
-
-  return () => {
-    lastCreatedId += 1;
-    return lastCreatedId;
-  };
-};
 
 const creatCommentId = getIdGenerator();
 

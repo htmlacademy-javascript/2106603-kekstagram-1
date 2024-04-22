@@ -9,4 +9,13 @@ const getRandomInteger = (a, b) => {
 //Поиск случайного элемента в переданном массиве.
 const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
 
-export {getRandomInteger, getRandomArrayElement};
+const getIdGenerator = () => {
+  let lastCreatedId = 0;
+
+  return () => {
+    lastCreatedId += 1;
+    return lastCreatedId;
+  };
+};
+
+export {getRandomInteger, getRandomArrayElement, getIdGenerator};
