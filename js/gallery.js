@@ -12,3 +12,14 @@ const createUserPicture = ({url, description, comments, likes}) => {
 
   return picture;
 };
+
+const displayUserPictures = (pictures) => {
+  const fragment = document.createDocumentFragment();
+  pictures.forEach((picture) => {
+    const pictureUser = createUserPicture(picture);
+    fragment.appendChild(pictureUser);
+  });
+  userPictures.appendChild(fragment);
+};
+
+export {displayUserPictures};
