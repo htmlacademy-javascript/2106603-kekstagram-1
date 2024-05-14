@@ -1,3 +1,4 @@
 import {getListPhotos} from './data.js';
+import {displayUserPictures} from './gallery.js';
 
-getListPhotos();
+displayUserPictures(getListPhotos());
