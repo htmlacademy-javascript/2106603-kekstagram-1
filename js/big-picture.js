@@ -1,3 +1,4 @@
+import {isEscapeKey} from './util.js';
 //отрисовка окна с полноразмерным изображением.
 const pictures = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
@@ -16,7 +17,7 @@ bigPictureCancel.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (evt) => {
-  if(evt.key === 'Escape') {
+  if(isEscapeKey(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
   }

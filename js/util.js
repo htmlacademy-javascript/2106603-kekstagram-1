@@ -18,4 +18,7 @@ const getIdGenerator = () => {
   };
 };
 
-export {getRandomInteger, getRandomArrayElement, getIdGenerator};
+//Проверка, что клавиша Esc
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey};
