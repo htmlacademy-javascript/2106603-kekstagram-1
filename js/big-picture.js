@@ -4,7 +4,7 @@ const pictures = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCancel = bigPicture.querySelector('#picture-cancel');
 
-const getSelectionPicture = (event) => {
+const openSelectionPicture = (event) => {
   if(event.target.closest('.picture')){
     bigPicture.classList.remove('hidden');
 
@@ -17,7 +17,7 @@ const getSelectionPicture = (event) => {
   }
 };
 
-pictures.addEventListener('click', getSelectionPicture);
+pictures.addEventListener('click', openSelectionPicture);
 
 bigPictureCancel.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
