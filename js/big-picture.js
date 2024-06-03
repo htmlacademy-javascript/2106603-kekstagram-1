@@ -44,7 +44,7 @@ const openSelectionPicture = (pictures) => {
     if(!minPicture){
       return;
     }
-    console.log(pictures);
+
     const picture = pictures.find(
       (item) => item.id === Number(minPicture.dataset.pictureId)
     );

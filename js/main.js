@@ -3,5 +3,6 @@ import {displayUserPictures} from './gallery.js';
 import {openSelectionPicture} from './big-picture.js';
 import './big-picture.js';
 
-displayUserPictures(getListPhotos());
-openSelectionPicture(getListPhotos());
+const photos = getListPhotos();
+displayUserPictures(photos);
+openSelectionPicture(photos);
