@@ -8,6 +8,7 @@ const bigPictureCancel = bigPicture.querySelector('#picture-cancel');
 const body = document.body;
 const commentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
+let comments = [];
 let commentsShown = 0;
 
 const onDocumentKeydown = (evt) => {
@@ -25,23 +26,24 @@ const insertPictureData = ({url, description, likes}) => {
 };
 
 const insertCommentData = ({avatar, name, message}) => {
-  const newElement = document.createElement('li');
-  newElement.classList.add('social__comment');
+  const comment = document.createElement('li');
+  comment.classList.add('social__comment');
   const imgComment = document.createElement('img');
   imgComment.classList.add('social__picture');
   const textComment = document.createElement('p');
   textComment.classList.add('social__text');
 
-  socialComments.append(newElement);
-  newElement.append(imgComment);
-  newElement.append(textComment);
+  socialComments.append(comment);
+  comment.append(imgComment);
+  comment.append(textComment);
 
   imgComment.setAttribute('src', avatar);
   imgComment.setAttribute('alt', name);
   textComment.textContent = message;
+  return comment;
 };
 
-const renderComments = (comments) => {
+const renderComments = () => {
   commentsShown += COMMENT_PER_PORTION;
   if (commentsShown >= comments.length){
     commentsLoader.classList.add('hidden');
@@ -59,18 +61,18 @@ const renderComments = (comments) => {
   commentCount.innerHTML = `${commentsShown} из <span class="comments-count"> ${comments.length}</span> комментариев`;
 };
 
-/*const onCommentsLoaderClick = () => {
-  commentsLoader.addEventListener('click', () => renderComments);
-};*/
+const onCommentsLoaderClick = () => {
+  commentsLoader.addEventListener('click', () => renderComments());
+};
 
 const openBigPicture = (data) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  //commentCount.classList.add('hidden');
-  //commentsLoader.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
   insertPictureData(data);
-  renderComments(data.comments);
+  comments = data.comments;
+  commentsShown = 0;
+  renderComments();
 };
 
 const openSelectionPicture = (pictures) => {
@@ -96,5 +98,5 @@ const closeBigPicture = () => {
 };
 
 closeBigPicture();
-
+onCommentsLoaderClick();
 export {openSelectionPicture};
