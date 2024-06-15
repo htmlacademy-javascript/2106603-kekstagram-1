@@ -60,7 +60,7 @@ const renderComments = () => {
   commentCount.innerHTML = `${commentsShown} из <span class="comments-count"> ${comments.length}</span> комментариев`;
 };
 
-const onCommentsLoaderClick = () => {
+const commentsLoaderClick = () => {
   commentsLoader.addEventListener('click', () => renderComments());
 };
 
@@ -97,5 +97,5 @@ const closeBigPicture = () => {
 };
 
 closeBigPicture();
-onCommentsLoaderClick();
+commentsLoaderClick();
 export {openSelectionPicture};
