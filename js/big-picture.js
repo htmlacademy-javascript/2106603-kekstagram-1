@@ -33,7 +33,6 @@ const insertCommentData = ({avatar, name, message}) => {
   const textComment = document.createElement('p');
   textComment.classList.add('social__text');
 
-  socialComments.append(comment);
   comment.append(imgComment);
   comment.append(textComment);
 
