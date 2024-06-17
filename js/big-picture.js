@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+
 const COMMENT_PER_PORTION = 5;
 //отрисовка окна с полноразмерным изображением.
 const galleryPictures = document.querySelector('.pictures');
