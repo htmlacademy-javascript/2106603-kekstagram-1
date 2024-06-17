@@ -1,4 +1,5 @@
 import {getRandomInteger, getRandomArrayElement, getIdGenerator} from './util.js';
+
 const PHOTO_COUNT = 25;
 const MIN_COUNT_LIKES = 15;
 const MAX_COUNT_LIKES = 200;
