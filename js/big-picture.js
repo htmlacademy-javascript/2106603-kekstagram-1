@@ -82,6 +82,7 @@ const openSelectionPicture = (pictures) => {
       return;
     }
 
+    evt.preventDefault();
     const picture = pictures.find(
       (item) => item.id === Number(minPicture.dataset.pictureId)
     );
