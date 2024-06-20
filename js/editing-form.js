@@ -1,9 +1,12 @@
 import {isEscapeKey} from './util.js';
+import './validate.js';
+import {pristine} from './validate.js';
 
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const uploadImgForm = document.querySelector('#upload-select-image');
+const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
 const body = document.body;
-const fieldSelectImg = document.querySelector('#upload-file');
-const imgUploadCancelButton = document.querySelector('#upload-cancel');
+const fieldSelectImg = uploadImgForm.querySelector('#upload-file');
+const imgUploadCancelButton = uploadImgForm.querySelector('#upload-cancel');
 
 const onDocumentKeydown = (evt) => {
   if(isEscapeKey(evt)) {
@@ -19,9 +22,12 @@ const showEditWindow = () => {
 };
 
 const imgUploadCancel = () => {
+  uploadImgForm.reset();
+  pristine.reset();
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
+
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
