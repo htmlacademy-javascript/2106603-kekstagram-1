@@ -37,3 +37,7 @@ const onDocumentKeydown = (evt) => {
 
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
+uploadImgForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+});

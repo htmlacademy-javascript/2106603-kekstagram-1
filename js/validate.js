@@ -32,8 +32,4 @@ pristine.addValidator(
   'Небольше 140 символов'
 );
 
-uploadImgForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
 export {pristine};
