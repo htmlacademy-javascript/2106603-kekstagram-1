@@ -716,7 +716,11 @@ main {
 .img-upload__error {
   display: block;
   font-size: 0.85em;
-  color: #c00;
+  color: #e90000;
+  background-color: #ffffff;
+  width: 450px;
+  border-radius: 5px;
+  margin: 0 auto;
 }
 
 
