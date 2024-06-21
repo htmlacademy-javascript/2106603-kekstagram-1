@@ -1,3 +1,4 @@
+const COMMENT_LENGTH = 140;
 const uploadImgForm = document.querySelector('#upload-select-image');
 const pristine = new Pristine(uploadImgForm, {
   classTo: 'img-upload__field-wrapper',
@@ -21,7 +22,7 @@ pristine.addValidator(
 //валидация комментария
 
 const validateComment = (value) => {
-  if(value.length <= 140) {
+  if(value.length <= COMMENT_LENGTH) {
     return true;
   }
 };
@@ -29,7 +30,7 @@ const validateComment = (value) => {
 pristine.addValidator(
   uploadImgForm.querySelector('.text__description'),
   validateComment,
-  'Небольше 140 символов'
+  `Небольше ${COMMENT_LENGTH} символов.`
 );
 
 export {pristine};
