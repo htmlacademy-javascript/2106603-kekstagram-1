@@ -7,13 +7,12 @@ const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
 const body = document.body;
 const fieldSelectImg = uploadImgForm.querySelector('#upload-file');
 const imgUploadCancelButton = uploadImgForm.querySelector('#upload-cancel');
+const fieldHashtag = uploadImgForm.querySelector('.text__hashtags');
+const fieldComment = uploadImgForm.querySelector('.text__description');
 
-const onDocumentKeydown = (evt) => {
-  if(isEscapeKey(evt)) {
-    evt.preventDefault();
-    imgUploadOverlay.classList.add('hidden');
-  }
-};
+const isFocusField = () =>
+  document.activeElement === fieldHashtag ||
+  document.activeElement === fieldComment;
 
 const showEditWindow = () => {
   imgUploadOverlay.classList.remove('hidden');
@@ -27,6 +26,13 @@ const imgUploadCancel = () => {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+const onDocumentKeydown = (evt) => {
+  if(isEscapeKey(evt) && !isFocusField()) {
+    evt.preventDefault();
+    imgUploadCancel();
+  }
 };
 
 fieldSelectImg.addEventListener('change', showEditWindow);
