@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
 import './validate.js';
-import {pristine} from './validate.js';
+import {pristine, preparationHashtags} from './validate.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
@@ -39,5 +39,6 @@ fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
 uploadImgForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  pristine.validate(preparationHashtags);
   pristine.validate();
 });
