@@ -2,6 +2,7 @@ const COMMENT_LENGTH = 140;
 const VALIDATE_HASHTAGE = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_LENGTH_HASHTAGE = 5;
 const uploadImgForm = document.querySelector('#upload-select-image');
+//const imputHashtag = uploadImgForm.querySelector('text__hashtags');
 
 const pristine = new Pristine(uploadImgForm, {
   classTo: 'img-upload__field-wrapper',
@@ -10,44 +11,32 @@ const pristine = new Pristine(uploadImgForm, {
 });
 
 //валидация хэштега
-const isValidHashtag = (value) => {
-  VALIDATE_HASHTAGE.test(value);
-};
-
-pristine.addValidator(
-  uploadImgForm.querySelector('.text__hashtags'),
-  isValidHashtag,
-  'Неверное написание хэштега'
-);
-
 const validNumberHashtags = (value) => value.length <= MAX_LENGTH_HASHTAGE;
 
 const validUniqueHashtag = (value) => {
   const lowerCaseHashtags = value.map((hashtag) => hashtag.toLowerCase());
-  return lowerCaseHashtags.length === new Set(lowerCaseHashtags).size;
+  const universalСollection = new Set(lowerCaseHashtags);
+  return lowerCaseHashtags.length === universalСollection.size;
 };
-
-pristine.addValidator(
-  uploadImgForm.querySelector('.text__hashtags'),
-  validNumberHashtags,
-  'Неболее 5 хэштегов'
-);
-
-pristine.addValidator(
-  uploadImgForm.querySelector('.text__hashtags'),
-  validUniqueHashtag,
-  'Неуникальный хэштег'
-);
 
 const preparationHashtags = (value) => {
-  const hashtags = value.trim().split('');
-  pristine.validate(validNumberHashtags(hashtags));
-  pristine.validate(validUniqueHashtag(hashtags));
-  hashtags.every(isValidHashtag);
+  const hashtags = value.trim().split(' ');
+  if(!validUniqueHashtag(hashtags)){
+    return false;
+  }
+  if(!validNumberHashtags(hashtags)){
+    return false;
+  }
+  return hashtags.every((hashtag) => VALIDATE_HASHTAGE.test(hashtag));
 };
 
-//валидация комментария
+pristine.addValidator(
+  uploadImgForm.querySelector('.text__hashtags'),
+  preparationHashtags,
+  'Хэштег не валиден'
+);
 
+//валидация комментария
 const validateComment = (value) => {
   if(value.length <= COMMENT_LENGTH) {
     return true;
@@ -57,7 +46,8 @@ const validateComment = (value) => {
 pristine.addValidator(
   uploadImgForm.querySelector('.text__description'),
   validateComment,
-  `Небольше ${COMMENT_LENGTH} символов.`
+  //`Небольше ${COMMENT_LENGTH} символов.`
+  'Небольше 140 символов'
 );
 
-export {pristine, preparationHashtags};
+export {pristine};
