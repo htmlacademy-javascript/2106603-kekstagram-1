@@ -28,12 +28,12 @@ const imgUploadCancel = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   if(isEscapeKey(evt) && !isFocusField()) {
     evt.preventDefault();
     imgUploadCancel();
   }
-};
+}
 
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
