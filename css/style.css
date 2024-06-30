@@ -710,6 +710,19 @@ main {
   border-radius: 5px;
 }
 
+/**
+* Сообщение об ошибке
+**/
+.img-upload__error {
+  display: block;
+  font-size: 0.85em;
+  color: #e90000;
+  background-color: #ffffff;
+  width: 450px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
 
 /**
  * Кнопка для отправки изображения
