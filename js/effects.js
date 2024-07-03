@@ -68,10 +68,12 @@ noUiSlider.create(effectSlider, {
   connect: 'lower',
 });
 
-filters.addEventListener('change', (evt) => {
+const onFilterSelection = (evt) => {
   if(!evt.target.closest('.effects__item')){
     return;
   }
   chosenFilter = FILTERS.find((filter) => filter.name === evt.target.value);
   imgPreview.className = `effects__preview--${chosenFilter.name}`;
-});
+};
+
+filters.addEventListener('change', onFilterSelection);
