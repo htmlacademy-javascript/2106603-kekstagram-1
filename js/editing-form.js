@@ -1,6 +1,8 @@
 import {isEscapeKey} from './util.js';
 import './validate.js';
 import {pristine} from './validate.js';
+import {resetPreview} from './scaling.js';
+import {resetEffects} from './effects.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
@@ -15,6 +17,8 @@ const isFocusField = () =>
   document.activeElement === fieldComment;
 
 const showEditWindow = () => {
+  resetPreview();
+  resetEffects();
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
