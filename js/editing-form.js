@@ -41,7 +41,24 @@ function onDocumentKeydown(evt) {
 
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
-uploadImgForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+const setImgFormSubmit = (onSuccess) => {
+  uploadImgForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
+
+      fetch('https://28.javascript.htmlacademy.pro/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ).then(() => onSuccess());
+
+    } else {
+      console.log('Проверка не прошла');
+    }
+  });
+};
+
+export {setImgFormSubmit, imgUploadCancel};
