@@ -12,6 +12,14 @@ const imgUploadCancelButton = uploadImgForm.querySelector('#upload-cancel');
 const fieldHashtag = uploadImgForm.querySelector('.text__hashtags');
 const fieldComment = uploadImgForm.querySelector('.text__description');
 
+let prefix;
+
+const showMessage = () => {
+  const message = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
+  const messageNew = message.cloneNode(true);
+  document.body.appendChild(messageNew);
+};
+
 const isFocusField = () =>
   document.activeElement === fieldHashtag ||
   document.activeElement === fieldComment;
@@ -53,10 +61,21 @@ const setImgFormSubmit = (onSuccess) => {
           method: 'POST',
           body: formData,
         },
-      ).then(() => onSuccess());
-
-    } else {
-      console.log('Проверка не прошла');
+      )
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+            prefix = 'success';
+            showMessage();
+          } else {
+            prefix = 'error';
+            showMessage();
+          }
+        })
+        .catch(() => {
+          prefix = 'error';
+          showMessage();
+        });
     }
   });
 };
