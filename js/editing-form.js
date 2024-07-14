@@ -16,12 +16,12 @@ let prefix;
 
 const showMessage = () => {
   const messageModal = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
-  const button = messageModal.querySelector(`.${prefix}__button`);
   const message = messageModal.cloneNode(true);
   document.body.appendChild(message);
 
+  const button = message.querySelector(`.${prefix}__button`);
   button.addEventListener('click', () => {
-    messageModal.remove();
+    message.remove();
   });
 };
 
@@ -62,7 +62,7 @@ const setImgFormSubmit = (onSuccess) => {
     if (isValid) {
       const formData = new FormData(evt.target);
 
-      fetch('https://28.javascript.htmlacademy.pro/kekstagram',
+      fetch('https://28.javascript.htmlacadem.pro/kekstagram',
         {
           method: 'POST',
           body: formData,
