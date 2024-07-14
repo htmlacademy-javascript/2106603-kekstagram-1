@@ -15,9 +15,14 @@ const fieldComment = uploadImgForm.querySelector('.text__description');
 let prefix;
 
 const showMessage = () => {
-  const message = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
-  const messageNew = message.cloneNode(true);
-  document.body.appendChild(messageNew);
+  const messageModal = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
+  const button = messageModal.querySelector(`.${prefix}__button`);
+  const message = messageModal.cloneNode(true);
+  document.body.appendChild(message);
+
+  button.addEventListener('click', () => {
+    messageModal.remove();
+  });
 };
 
 const isFocusField = () =>
@@ -49,6 +54,7 @@ function onDocumentKeydown(evt) {
 
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
+
 const setImgFormSubmit = (onSuccess) => {
   uploadImgForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
