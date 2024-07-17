@@ -11,6 +11,11 @@ const fieldSelectImg = uploadImgForm.querySelector('#upload-file');
 const imgUploadCancelButton = uploadImgForm.querySelector('#upload-cancel');
 const fieldHashtag = uploadImgForm.querySelector('.text__hashtags');
 const fieldComment = uploadImgForm.querySelector('.text__description');
+const submitButton = uploadImgForm.querySelector('#upload-submit');
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 
 let prefix;
 
@@ -18,9 +23,24 @@ const showMessage = () => {
   const messageModal = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
   const message = messageModal.cloneNode(true);
   document.body.appendChild(message);
+  document.addEventListener('keydown', (evt) => {
+    if(isEscapeKey(evt)) {
+      evt.preventDefault();
+      message.remove();
+    }
+  });
 
   const button = message.querySelector(`.${prefix}__button`);
   button.addEventListener('click', () => {
+    message.remove();
+  });
+  document.removeEventListener('keydown', (evt) => {
+    if(isEscapeKey(evt)) {
+      evt.preventDefault();
+      message.remove();
+    }
+  });
+  document.addEventListener('click', () => {
     message.remove();
   });
 };
@@ -52,6 +72,16 @@ function onDocumentKeydown(evt) {
   }
 }
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
 
@@ -60,9 +90,10 @@ const setImgFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
+      blockSubmitButton();
       const formData = new FormData(evt.target);
 
-      fetch('https://28.javascript.htmlacadem.pro/kekstagram',
+      fetch('https://28.javascript.htmlacademy.pro/kekstagram',
         {
           method: 'POST',
           body: formData,
@@ -80,8 +111,10 @@ const setImgFormSubmit = (onSuccess) => {
         })
         .catch(() => {
           prefix = 'error';
+          //unblockSubmitButton();
           showMessage();
-        });
+        })
+        .finally(unblockSubmitButton);
     }
   });
 };
