@@ -3,6 +3,7 @@ import './validate.js';
 import {pristine} from './validate.js';
 import {resetPreview} from './scaling.js';
 import {resetEffects} from './effects.js';
+import {showMessage} from './message-form.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
@@ -18,32 +19,6 @@ const SubmitButtonText = {
 };
 
 let prefix;
-
-const showMessage = () => {
-  const messageModal = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
-  const message = messageModal.cloneNode(true);
-  document.body.appendChild(message);
-  document.addEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt)) {
-      evt.preventDefault();
-      message.remove();
-    }
-  });
-
-  const button = message.querySelector(`.${prefix}__button`);
-  button.addEventListener('click', () => {
-    message.remove();
-  });
-  document.removeEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt)) {
-      evt.preventDefault();
-      message.remove();
-    }
-  });
-  document.addEventListener('click', () => {
-    message.remove();
-  });
-};
 
 const isFocusField = () =>
   document.activeElement === fieldHashtag ||
@@ -103,16 +78,16 @@ const setImgFormSubmit = (onSuccess) => {
           if (response.ok) {
             onSuccess();
             prefix = 'success';
-            showMessage();
+            showMessage(prefix);
           } else {
             prefix = 'error';
-            showMessage();
+            showMessage(prefix);
           }
         })
         .catch(() => {
           prefix = 'error';
           //unblockSubmitButton();
-          showMessage();
+          showMessage(prefix);
         })
         .finally(unblockSubmitButton);
     }
