@@ -4,6 +4,7 @@ import {pristine} from './validate.js';
 import {resetPreview} from './scaling.js';
 import {resetEffects} from './effects.js';
 import {showMessage} from './message-form.js';
+import { sendData } from './api.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
@@ -67,13 +68,7 @@ const setImgFormSubmit = (onSuccess) => {
     if (isValid) {
       blockSubmitButton();
       const formData = new FormData(evt.target);
-
-      fetch('https://28.javascript.htmlacademy.pro/kekstagram',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      )
+      sendData(formData)
         .then((response) => {
           if (response.ok) {
             onSuccess();
