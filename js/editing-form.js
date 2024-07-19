@@ -3,7 +3,7 @@ import './validate.js';
 import {pristine} from './validate.js';
 import {resetPreview} from './scaling.js';
 import {resetEffects} from './effects.js';
-import {showMessage, closeMessage} from './message-form.js';
+import {showMessage} from './message-form.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
@@ -90,7 +90,6 @@ const setImgFormSubmit = (onSuccess) => {
         })
         .finally(unblockSubmitButton);
     }
-    closeMessage();
   });
 };
 
