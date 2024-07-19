@@ -1,29 +1,35 @@
 import {isEscapeKey} from './util.js';
 
+const onDocumentKeydown = (evt) => {
+  if(isEscapeKey(evt)) {
+    evt.preventDefault();
+    if(document.querySelector('.success')){
+      document.querySelector('.success').remove();
+    } else {
+      document.querySelector('.error').remove();
+    }
+  }
+};
+
 const showMessage = (prefix) => {
   const messageModal = document.querySelector(`#${prefix}`).content.querySelector(`.${prefix}`);
   const message = messageModal.cloneNode(true);
   document.body.appendChild(message);
+  document.addEventListener('keydown', onDocumentKeydown);
 
-  document.addEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt)) {
-      evt.preventDefault();
-      message.remove();
-    }
-  });
-
-  const button = message.querySelector(`.${prefix}__button`);
+  const button = document.querySelector(`.${prefix}__button`);
   button.addEventListener('click', () => {
-    message.remove();
+    document.querySelector(`.${prefix}`).remove();
   });
-  document.removeEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt)) {
-      evt.preventDefault();
-      message.remove();
+  document.addEventListener('click', (evt) => {
+    if (evt.target === document.querySelector(`.${prefix}`)){
+      document.querySelector(`.${prefix}`).remove();
     }
-  });
-  document.addEventListener('click', () => {
-    message.remove();
   });
 };
-export {showMessage};
+
+const closeMessage = () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+export {showMessage, closeMessage};
