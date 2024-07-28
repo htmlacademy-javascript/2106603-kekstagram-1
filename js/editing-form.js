@@ -68,7 +68,13 @@ const setImgFormSubmit = (onSuccess) => {
     if (isValid) {
       blockSubmitButton();
       const formData = new FormData(evt.target);
-      sendData(formData)
+      //sendData(formData)
+      fetch(
+        'https://28.javascript.htmlacademy.pro/kekstagram/',
+        {
+          method: 'POST',
+          body: formData,
+        })
         .then((response) => {
           if (response.ok) {
             onSuccess();
@@ -81,7 +87,7 @@ const setImgFormSubmit = (onSuccess) => {
         })
         .catch(() => {
           prefix = 'error';
-          showMessage(prefix);
+          showMessage('prefix');
         })
         .finally(unblockSubmitButton);
     }
