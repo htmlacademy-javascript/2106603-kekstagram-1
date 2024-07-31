@@ -5,11 +5,20 @@ import './effects.js';
 import {getData} from './api.js';
 import {showAlert} from './util.js';
 
-getData()
+async function showGallery() {
+  try {
+    const picture = await getData();
+    displayUserPictures(picture);
+    openSelectionPicture(picture);
+  } catch(err) {
+    showAlert(err.message);
+  }
+}
+/*getData()
   .then((picture) => {
     displayUserPictures(picture);
     openSelectionPicture(picture);
   })
-  .catch((err) => showAlert(err.message));
-
+  .catch((err) => showAlert(err.message));*/
+showGallery();
 setImgFormSubmit(imgUploadCancel);
