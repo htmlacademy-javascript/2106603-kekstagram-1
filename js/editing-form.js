@@ -4,7 +4,7 @@ import {pristine} from './validate.js';
 import {resetPreview} from './scaling.js';
 import {resetEffects} from './effects.js';
 import {showMessage} from './message-form.js';
-import { sendData } from './api.js';
+//import { sendData } from './api.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
