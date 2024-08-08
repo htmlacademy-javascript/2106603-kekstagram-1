@@ -3,8 +3,6 @@ import './validate.js';
 import {pristine} from './validate.js';
 import {resetPreview} from './scaling.js';
 import {resetEffects} from './effects.js';
-import {showMessage} from './message-form.js';
-import { sendData } from './api.js';
 
 const uploadImgForm = document.querySelector('#upload-select-image');
 const imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
@@ -18,8 +16,6 @@ const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
 };
-
-let prefix;
 
 const isFocusField = () =>
   document.activeElement === fieldHashtag ||
@@ -62,34 +58,14 @@ fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
 
 const setImgFormSubmit = (onSuccess) => {
-  uploadImgForm.addEventListener('submit', (evt) => {
+  uploadImgForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
       const formData = new FormData(evt.target);
-      sendData(formData)
-      /*fetch(
-        'https://28.javascript.htmlacademy.pro/kekstagram/',
-        {
-          method: 'POST',
-          body: formData,
-        })*/
-        .then((response) => {
-          if (response.ok) {
-            onSuccess();
-            prefix = 'success';
-            showMessage(prefix);
-          } else {
-            prefix = 'error';
-            showMessage(prefix);
-          }
-        })
-        .catch(() => {
-          prefix = 'error';
-          showMessage('prefix');
-        })
-        .finally(unblockSubmitButton);
+      await onSuccess(formData);
+      unblockSubmitButton();
     }
   });
 };
