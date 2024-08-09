@@ -11,6 +11,11 @@ const fieldSelectImg = uploadImgForm.querySelector('#upload-file');
 const imgUploadCancelButton = uploadImgForm.querySelector('#upload-cancel');
 const fieldHashtag = uploadImgForm.querySelector('.text__hashtags');
 const fieldComment = uploadImgForm.querySelector('.text__description');
+const submitButton = uploadImgForm.querySelector('#upload-submit');
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 
 const isFocusField = () =>
   document.activeElement === fieldHashtag ||
@@ -39,9 +44,30 @@ function onDocumentKeydown(evt) {
   }
 }
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
 fieldSelectImg.addEventListener('change', showEditWindow);
 imgUploadCancelButton.addEventListener('click', imgUploadCancel);
-uploadImgForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+
+const setImgFormSubmit = (onSuccess) => {
+  uploadImgForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      const formData = new FormData(evt.target);
+      await onSuccess(formData);
+      unblockSubmitButton();
+    }
+  });
+};
+
+export {setImgFormSubmit, imgUploadCancel};
