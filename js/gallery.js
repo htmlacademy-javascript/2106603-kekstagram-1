@@ -1,6 +1,7 @@
 const userPictures = document.querySelector('.pictures');
 const templateElement = document.querySelector('#picture')
   .content.querySelector('.picture');
+const imgFilters = document.querySelector('.img-filters');
 
 const createUserPicture = ({url, description, comments, likes, id}) => {
   const picture = templateElement.cloneNode(true);
@@ -15,6 +16,7 @@ const createUserPicture = ({url, description, comments, likes, id}) => {
 };
 
 const displayUserPictures = (pictures) => {
+  imgFilters.classList.remove('img-filters--inactive');
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
     const pictureUser = createUserPicture(picture);
