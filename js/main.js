@@ -5,7 +5,9 @@ import './effects.js';
 import {getData, sendData} from './api.js';
 import {showAlert} from './util.js';
 import {showMessage} from './message-form.js';
+import {filters} from './gallery-filters.js';
 
+filters();
 try {
   const picture = await getData();
   displayUserPictures(picture);
