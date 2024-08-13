@@ -42,4 +42,14 @@ const showAlert = (message) => {
     alertContainer.remove();
   }, 10000);
 };
-export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert};
+
+const randomSelection = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
+const selectionByComments = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
+
+export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert, randomSelection, selectionByComments};

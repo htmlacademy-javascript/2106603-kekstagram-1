@@ -10,6 +10,7 @@ import {filters} from './gallery-filters.js';
 filters();
 try {
   const picture = await getData();
+
   displayUserPictures(picture);
   openSelectionPicture(picture);
 } catch(err) {
