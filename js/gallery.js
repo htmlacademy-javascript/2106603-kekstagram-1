@@ -2,6 +2,7 @@ const userPictures = document.querySelector('.pictures');
 const templateElement = document.querySelector('#picture')
   .content.querySelector('.picture');
 const imgFilters = document.querySelector('.img-filters');
+let currentPictures = [];
 
 const createUserPicture = ({url, description, comments, likes, id}) => {
   const picture = templateElement.cloneNode(true);
@@ -26,4 +27,9 @@ const displayUserPictures = (pictures) => {
   userPictures.appendChild(fragment);
 };
 
-export {displayUserPictures};
+const selectedGallery = (pictures) => {
+  currentPictures = pictures;
+  displayUserPictures(currentPictures);
+};
+
+export {selectedGallery};

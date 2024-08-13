@@ -1,17 +1,17 @@
-import {displayUserPictures} from './gallery.js';
+import {selectedGallery} from './gallery.js';
 import {openSelectionPicture} from './big-picture.js';
 import {setImgFormSubmit, imgUploadCancel} from './editing-form.js';
 import './effects.js';
 import {getData, sendData} from './api.js';
-import {showAlert} from './util.js';
+import {showAlert, debounce} from './util.js';
 import {showMessage} from './message-form.js';
-import {filters} from './gallery-filters.js';
+import {filteredImages,getFilteredPictures} from './gallery-filters.js';
 
-filters();
 try {
   const picture = await getData();
-
-  displayUserPictures(picture);
+  const debouncedSelectedGallery = debounce(selectedGallery);
+  filteredImages(picture, debouncedSelectedGallery);
+  selectedGallery(getFilteredPictures());
   openSelectionPicture(picture);
 } catch(err) {
   showAlert(err.message);

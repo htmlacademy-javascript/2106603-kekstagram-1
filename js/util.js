@@ -52,4 +52,13 @@ const randomSelection = (array) => {
 
 const selectionByComments = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
 
-export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert, randomSelection, selectionByComments};
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert, randomSelection, selectionByComments, debounce};
