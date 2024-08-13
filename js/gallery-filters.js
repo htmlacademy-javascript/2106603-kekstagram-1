@@ -1,4 +1,13 @@
+const RANDOM_IMG_COUNT = 10;
+const Filters = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed',
+};
+const filterContainer = document.querySelector('.img-filters');
 const filtersButtons = [...document.querySelectorAll('.img-filters__button')];
+let currentFilter = Filters.DEFAULT;
+let pictures = [];
 
 const filters = () => {
   filtersButtons.forEach((button) => {
@@ -8,5 +17,7 @@ const filters = () => {
     });
   });
 };
+
+
 
 export {filters};

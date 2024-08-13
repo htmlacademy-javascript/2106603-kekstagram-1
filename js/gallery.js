@@ -16,6 +16,7 @@ const createUserPicture = ({url, description, comments, likes, id}) => {
 };
 
 const displayUserPictures = (pictures) => {
+  userPictures.querySelectorAll('.picture').forEach((element) => element.remove());
   imgFilters.classList.remove('img-filters--inactive');
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
