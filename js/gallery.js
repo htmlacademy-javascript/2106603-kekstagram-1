@@ -1,3 +1,4 @@
+import {getFilteredPictures} from './gallery-filters.js';
 const userPictures = document.querySelector('.pictures');
 const templateElement = document.querySelector('#picture')
   .content.querySelector('.picture');
@@ -17,13 +18,15 @@ const createUserPicture = ({url, description, comments, likes, id}) => {
 };
 
 const displayUserPictures = (pictures) => {
-  userPictures.querySelectorAll('.picture').forEach((element) => element.remove());
   imgFilters.classList.remove('img-filters--inactive');
   const fragment = document.createDocumentFragment();
+  pictures = getFilteredPictures(pictures);
+
   pictures.forEach((picture) => {
     const pictureUser = createUserPicture(picture);
     fragment.appendChild(pictureUser);
   });
+  userPictures.querySelectorAll('.picture').forEach((element) => element.remove());
   userPictures.appendChild(fragment);
 };
 
@@ -32,4 +35,4 @@ const selectedGallery = (pictures) => {
   displayUserPictures(currentPictures);
 };
 
-export {selectedGallery};
+export {selectedGallery, displayUserPictures};

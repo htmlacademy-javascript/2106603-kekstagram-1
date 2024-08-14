@@ -49,9 +49,14 @@ const randomSelection = (array) => {
     j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
 };
 
-const selectionByComments = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
+const selectionByComments = (pictureA, pictureB) => {
+  const B = pictureB.comments.length;
+  const A = pictureA.comments.length;
+  return B - A;
+};
 
 function debounce (callback, timeoutDelay = 500) {
   let timeoutId;

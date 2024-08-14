@@ -8,17 +8,15 @@ const Filters = {
 const filterContainer = document.querySelector('.img-filters');
 const filtersButtons = [...document.querySelectorAll('.img-filters__button')];
 let currentFilter = Filters.DEFAULT;
-let pictures = [];
 
-const getFilteredPictures = () => {
+const getFilteredPictures = (pictures) => {
   switch (currentFilter) {
     case Filters.RANDOM:
       return randomSelection(pictures).slice(0, RANDOM_IMG_COUNT);
     case Filters.DISCUSSED:
-      pictures
+      return pictures
         .slice()
         .sort(selectionByComments);
-      return pictures;
     default:
       return pictures.slice();
   }
@@ -31,21 +29,16 @@ const onFilterClick = (cb) => {
         return;
       }
       const clickedButton = evt.target;
+
       if (clickedButton === currentFilter) {
         return;
       }
       filterContainer.querySelector('.img-filters__button.img-filters__button--active').classList.remove('img-filters__button--active');
       clickedButton.classList.add('img-filters__button--active');
-      currentFilter = clickedButton.dispatchEvent;
-      cb(getFilteredPictures());
+      currentFilter = clickedButton.id;
+      cb();
     });
   });
 };
 
-const filteredImages = (images, cb) => {
-  pictures = images;
-  onFilterClick(cb);
-};
-
-
-export {filteredImages, getFilteredPictures};
+export {getFilteredPictures, onFilterClick};
