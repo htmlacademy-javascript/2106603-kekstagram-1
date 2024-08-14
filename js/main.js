@@ -6,6 +6,7 @@ import {getData, sendData} from './api.js';
 import {showAlert, debounce} from './util.js';
 import {showMessage} from './message-form.js';
 import {onFilterClick} from './gallery-filters.js';
+import './img-to-upload.js';
 
 const RERENDER_DELAY = 500;
 
