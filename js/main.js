@@ -3,7 +3,7 @@ import {openSelectionPicture} from './big-picture.js';
 import {setImgFormSubmit, imgUploadCancel} from './editing-form.js';
 import './effects.js';
 import {getData, sendData} from './api.js';
-import {showAlert} from './util.js';
+import {showAlert, debounce} from './util.js';
 import {showMessage} from './message-form.js';
 import {onFilterClick} from './gallery-filters.js';
 
@@ -14,7 +14,7 @@ try {
   //filteredImages(picture, debouncedSelectedGallery);
   //selectedGallery(getFilteredPictures());
   displayUserPictures(picture);
-  onFilterClick(() => displayUserPictures(picture));
+  onFilterClick(debounce(() => displayUserPictures(picture)));
   openSelectionPicture(picture);
 } catch(err) {
   showAlert(err.message);
