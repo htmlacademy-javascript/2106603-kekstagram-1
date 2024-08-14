@@ -42,4 +42,29 @@ const showAlert = (message) => {
     alertContainer.remove();
   }, 10000);
 };
-export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert};
+
+const randomSelection = (array) => {
+  let j;
+  for (let i = array.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
+const selectionByComments = (pictureA, pictureB) => {
+  const B = pictureB.comments.length;
+  const A = pictureA.comments.length;
+  return B - A;
+};
+
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert, randomSelection, selectionByComments, debounce};
