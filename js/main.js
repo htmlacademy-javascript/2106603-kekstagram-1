@@ -9,10 +9,6 @@ import {onFilterClick} from './gallery-filters.js';
 
 try {
   const picture = await getData();
-
-  //const debouncedSelectedGallery = debounce(selectedGallery);
-  //filteredImages(picture, debouncedSelectedGallery);
-  //selectedGallery(getFilteredPictures());
   displayUserPictures(picture);
   onFilterClick(debounce(() => displayUserPictures(picture)));
   openSelectionPicture(picture);

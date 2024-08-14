@@ -8,7 +8,7 @@ const Filters = {
 const filterContainer = document.querySelector('.img-filters');
 const filtersButtons = [...document.querySelectorAll('.img-filters__button')];
 let currentFilter = Filters.DEFAULT;
-//let cuPictures = [];
+
 const getFilteredPictures = (pictures) => {
   switch (currentFilter) {
     case Filters.RANDOM:
