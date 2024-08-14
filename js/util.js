@@ -58,13 +58,13 @@ const selectionByComments = (pictureA, pictureB) => {
   return B - A;
 };
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert, randomSelection, selectionByComments, debounce};

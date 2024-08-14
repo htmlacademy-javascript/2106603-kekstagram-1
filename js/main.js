@@ -7,10 +7,15 @@ import {showAlert, debounce} from './util.js';
 import {showMessage} from './message-form.js';
 import {onFilterClick} from './gallery-filters.js';
 
+const RERENDER_DELAY = 500;
+
 try {
   const picture = await getData();
   displayUserPictures(picture);
-  onFilterClick(debounce(() => displayUserPictures(picture)));
+  onFilterClick(debounce(
+    () => displayUserPictures(picture),
+    RERENDER_DELAY,
+  ));
   openSelectionPicture(picture);
 } catch(err) {
   showAlert(err.message);
