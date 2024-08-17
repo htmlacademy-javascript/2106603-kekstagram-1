@@ -93,7 +93,7 @@ const openSelectionPicture = (pictures) => {
   });
 };
 
-const closeBigPicture = () => {
+const setCloseBigPicture = () => {
   bigPictureCancel.addEventListener('click', () => {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -101,6 +101,6 @@ const closeBigPicture = () => {
   });
 };
 
-closeBigPicture();
+setCloseBigPicture();
 commentsLoaderClick();
 export {openSelectionPicture};
