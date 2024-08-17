@@ -13,8 +13,6 @@ const showMessage = (prefix) => {
     document.removeEventListener('keydown', onDocumentKeydown);
   };
 
-  document.addEventListener('keydown', onDocumentKeydown);
-
   const onDocumentClick = (evt) => {
     if (evt.target === document.querySelector(`.${prefix}`)){
       document.querySelector(`.${prefix}`).remove();
@@ -22,6 +20,7 @@ const showMessage = (prefix) => {
     document.removeEventListener('click', onDocumentClick);
   };
   document.addEventListener('click',onDocumentClick);
+  document.addEventListener('keydown', onDocumentKeydown);
 
   const button = document.querySelector(`.${prefix}__button`);
   button.addEventListener('click', () => {
