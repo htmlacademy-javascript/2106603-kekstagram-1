@@ -1,7 +1,7 @@
 import {isEscapeKey} from './util.js';
 
 const COMMENT_PER_PORTION = 5;
-//отрисовка окна с полноразмерным изображением.
+
 const galleryPictures = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const socialComments = bigPicture.querySelector('.social__comments');
@@ -14,7 +14,7 @@ let comments = [];
 let commentsShown = 0;
 
 const onDocumentKeydown = (evt) => {
-  if(isEscapeKey(evt)) {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
     document.removeEventListener('keydown', onDocumentKeydown);
@@ -81,7 +81,7 @@ const openBigPicture = (data) => {
 const openSelectionPicture = (pictures) => {
   galleryPictures.addEventListener('click', (evt) => {
     const minPicture = evt.target.closest('.picture');
-    if(!minPicture){
+    if (!minPicture){
       return;
     }
 

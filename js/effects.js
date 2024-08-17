@@ -88,9 +88,10 @@ const updateEffectSlider = () => {
     containerEffectSlider.classList.remove('hidden');
   }
 };
+
 //выбор и применение фильтра
 const onFilterSelection = (evt) => {
-  if(!evt.target.closest('.effects__item')){
+  if (!evt.target.closest('.effects__item')){
     return;
   }
   chosenFilter = FILTERS.find((filter) => filter.name === evt.target.value);

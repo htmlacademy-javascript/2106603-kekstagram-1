@@ -6,7 +6,7 @@ const showMessage = (prefix) => {
   document.body.appendChild(message);
 
   const onDocumentKeydown = (evt) => {
-    if(isEscapeKey(evt)) {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
       document.querySelector(`.${prefix}`).remove();
     }
