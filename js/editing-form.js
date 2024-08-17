@@ -41,6 +41,7 @@ function onDocumentKeydown(evt) {
   if(isEscapeKey(evt) && !isFocusField()) {
     evt.preventDefault();
     imgUploadCancel();
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
 }
 
