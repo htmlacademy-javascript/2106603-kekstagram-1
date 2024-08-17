@@ -11,13 +11,13 @@ import './img-to-upload.js';
 const RERENDER_DELAY = 500;
 
 try {
-  const picture = await getData();
-  displayUserPictures(picture);
+  const pictures = await getData();
+  displayUserPictures(pictures);
   onFilterClick(debounce(
-    () => displayUserPictures(picture),
+    () => displayUserPictures(pictures),
     RERENDER_DELAY,
   ));
-  openSelectionPicture(picture);
+  openSelectionPicture(pictures);
 } catch(err) {
   showAlert(err.message);
 }
