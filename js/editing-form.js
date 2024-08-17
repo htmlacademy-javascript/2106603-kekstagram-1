@@ -21,7 +21,7 @@ const isFocusField = () =>
   document.activeElement === fieldHashtag ||
   document.activeElement === fieldComment;
 
-const showEditWindow = () => {
+const onShowEditWindow = () => {
   resetPreview();
   resetEffects();
   imgUploadOverlay.classList.remove('hidden');
@@ -29,7 +29,7 @@ const showEditWindow = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const imgUploadCancel = () => {
+const onImgUploadCancel = () => {
   uploadImgForm.reset();
   pristine.reset();
   imgUploadOverlay.classList.add('hidden');
@@ -38,9 +38,10 @@ const imgUploadCancel = () => {
 };
 
 function onDocumentKeydown(evt) {
-  if(isEscapeKey(evt) && !isFocusField()) {
+  if (isEscapeKey(evt) && !isFocusField()) {
     evt.preventDefault();
-    imgUploadCancel();
+    onImgUploadCancel();
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
 }
 
@@ -54,8 +55,8 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-fieldSelectImg.addEventListener('change', showEditWindow);
-imgUploadCancelButton.addEventListener('click', imgUploadCancel);
+fieldSelectImg.addEventListener('change', onShowEditWindow);
+imgUploadCancelButton.addEventListener('click', onImgUploadCancel);
 
 const setImgFormSubmit = (onSuccess) => {
   uploadImgForm.addEventListener('submit', async (evt) => {
@@ -70,4 +71,4 @@ const setImgFormSubmit = (onSuccess) => {
   });
 };
 
-export {setImgFormSubmit, imgUploadCancel};
+export {setImgFormSubmit, onImgUploadCancel};

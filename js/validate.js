@@ -2,7 +2,6 @@ const COMMENT_LENGTH = 140;
 const VALIDATE_HASHTAGE = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_LENGTH_HASHTAGE = 5;
 const uploadImgForm = document.querySelector('#upload-select-image');
-//const imputHashtag = uploadImgForm.querySelector('text__hashtags');
 
 const pristine = new Pristine(uploadImgForm, {
   classTo: 'img-upload__field-wrapper',
@@ -19,12 +18,12 @@ const validUniqueHashtag = (value) => {
   return lowerCaseHashtags.length === universalСollection.size;
 };
 
-const preparationHashtags = (value) => {
+const prepareHashtags = (value) => {
   const hashtags = value.trim().split(' ');
-  if(!validUniqueHashtag(hashtags)){
+  if (!validUniqueHashtag(hashtags)){
     return false;
   }
-  if(!validNumberHashtags(hashtags)){
+  if (!validNumberHashtags(hashtags)){
     return false;
   }
   return hashtags.every((hashtag) => VALIDATE_HASHTAGE.test(hashtag));
@@ -32,13 +31,13 @@ const preparationHashtags = (value) => {
 
 pristine.addValidator(
   uploadImgForm.querySelector('.text__hashtags'),
-  preparationHashtags,
+  prepareHashtags,
   'Хэштег не валиден'
 );
 
 //валидация комментария
 const validateComment = (value) => {
-  if(value.length <= COMMENT_LENGTH) {
+  if (value.length <= COMMENT_LENGTH) {
     return true;
   }
 };
@@ -46,8 +45,7 @@ const validateComment = (value) => {
 pristine.addValidator(
   uploadImgForm.querySelector('.text__description'),
   validateComment,
-  //`Небольше ${COMMENT_LENGTH} символов.`
-  'Небольше 140 символов'
+  `Небольше ${COMMENT_LENGTH} символов.`
 );
 
 export {pristine};

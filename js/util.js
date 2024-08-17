@@ -1,23 +1,3 @@
-//Получение случайного целого числа в заданном интервале, включительно
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-//Поиск случайного элемента в переданном массиве.
-const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
-
-const getIdGenerator = () => {
-  let lastCreatedId = 0;
-
-  return () => {
-    lastCreatedId += 1;
-    return lastCreatedId;
-  };
-};
-
 //Проверка, что клавиша Esc
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
@@ -43,6 +23,16 @@ const showAlert = (message) => {
   }, 10000);
 };
 
+//оптимизация кодп на основе сокращения вызовов функции
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 const randomSelection = (array) => {
   let j;
   for (let i = array.length - 1; i > 0; i--) {
@@ -58,13 +48,4 @@ const selectionByComments = (pictureA, pictureB) => {
   return B - A;
 };
 
-function debounce (callback, timeoutDelay = 500) {
-  let timeoutId;
-
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
-}
-
-export {getRandomInteger, getRandomArrayElement, getIdGenerator, isEscapeKey, showAlert, randomSelection, selectionByComments, debounce};
+export {isEscapeKey, showAlert, debounce, randomSelection, selectionByComments};

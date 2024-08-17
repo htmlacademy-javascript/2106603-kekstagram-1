@@ -16,7 +16,7 @@ const scalePreview = (value) => {
 const onSmallerButtonClick = () => {
   const currentValue = parseInt(valueScaleInput.value, 10);
   let newValue = currentValue - STEP_SCALE;
-  if(newValue < MIN_VALUE){
+  if (newValue < MIN_VALUE){
     newValue = MIN_VALUE;
   }
   scalePreview(newValue);
@@ -25,7 +25,7 @@ const onSmallerButtonClick = () => {
 const onBiggerButtonClick = () => {
   const currentValue = parseInt(valueScaleInput.value, 10);
   let newValue = currentValue + STEP_SCALE;
-  if(newValue > MAX_VALUE){
+  if (newValue > MAX_VALUE){
     newValue = MAX_VALUE;
   }
   scalePreview(newValue);

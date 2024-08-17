@@ -1,21 +1,23 @@
 import {isEscapeKey} from './util.js';
 
 const COMMENT_PER_PORTION = 5;
-//отрисовка окна с полноразмерным изображением.
+
 const galleryPictures = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const socialComments = bigPicture.querySelector('.social__comments');
 const bigPictureCancel = bigPicture.querySelector('#picture-cancel');
 const body = document.body;
-const commentCount = bigPicture.querySelector('.social__comment-count');
+const commentCount = bigPicture.querySelector('.comments-count');
+const commentsShownItem = bigPicture.querySelector('.comments-shown');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 let comments = [];
 let commentsShown = 0;
 
 const onDocumentKeydown = (evt) => {
-  if(isEscapeKey(evt)) {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
 
@@ -58,7 +60,8 @@ const renderComments = () => {
   }
   socialComments.innerHTML = '';
   socialComments.append(fragment);
-  commentCount.innerHTML = `${commentsShown} из <span class="comments-count"> ${comments.length}</span> комментариев`;
+  commentCount.textContent = comments.length;
+  commentsShownItem.textContent = commentsShown;
 };
 
 const commentsLoaderClick = () => {
@@ -78,7 +81,7 @@ const openBigPicture = (data) => {
 const openSelectionPicture = (pictures) => {
   galleryPictures.addEventListener('click', (evt) => {
     const minPicture = evt.target.closest('.picture');
-    if(!minPicture){
+    if (!minPicture){
       return;
     }
 
@@ -90,7 +93,7 @@ const openSelectionPicture = (pictures) => {
   });
 };
 
-const closeBigPicture = () => {
+const setCloseBigPicture = () => {
   bigPictureCancel.addEventListener('click', () => {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -98,6 +101,6 @@ const closeBigPicture = () => {
   });
 };
 
-closeBigPicture();
+setCloseBigPicture();
 commentsLoaderClick();
 export {openSelectionPicture};

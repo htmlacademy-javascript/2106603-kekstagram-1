@@ -6,7 +6,7 @@ const Filters = {
   DISCUSSED: 'filter-discussed',
 };
 const filterContainer = document.querySelector('.img-filters');
-const filtersButtons = [...document.querySelectorAll('.img-filters__button')];
+const filtersButtons = Array.from(document.querySelectorAll('.img-filters__button'));
 let currentFilter = Filters.DEFAULT;
 
 const getFilteredPictures = (pictures) => {
