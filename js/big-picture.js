@@ -7,7 +7,8 @@ const bigPicture = document.querySelector('.big-picture');
 const socialComments = bigPicture.querySelector('.social__comments');
 const bigPictureCancel = bigPicture.querySelector('#picture-cancel');
 const body = document.body;
-const commentCount = bigPicture.querySelector('.social__comment-count');
+const commentCount = bigPicture.querySelector('.comments-count');
+const commentsShownItem = bigPicture.querySelector('.comments-shown');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 let comments = [];
 let commentsShown = 0;
@@ -59,7 +60,8 @@ const renderComments = () => {
   }
   socialComments.innerHTML = '';
   socialComments.append(fragment);
-  commentCount.innerHTML = `${commentsShown} из <span class="comments-count"> ${comments.length}</span> комментариев`;
+  commentCount.textContent = comments.length;
+  commentsShownItem.textContent = commentsShown;
 };
 
 const commentsLoaderClick = () => {
