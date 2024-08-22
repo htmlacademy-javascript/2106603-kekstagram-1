@@ -19,6 +19,9 @@ const validUniqueHashtag = (value) => {
 };
 
 const prepareHashtags = (value) => {
+  if (value === '') {
+    return true;
+  }
   const hashtags = value.trim().split(' ');
   if (!validUniqueHashtag(hashtags)){
     return false;
