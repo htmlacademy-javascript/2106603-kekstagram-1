@@ -25,6 +25,7 @@ const showMessage = (prefix) => {
   const button = document.querySelector(`.${prefix}__button`);
   button.addEventListener('click', () => {
     document.querySelector(`.${prefix}`).remove();
+    document.removeEventListener('keydown', onDocumentKeydown);
   });
 };
 
